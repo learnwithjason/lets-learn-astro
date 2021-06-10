@@ -1,0 +1,16 @@
+{
+  "name": "@astrojs/starter-kit",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "astro dev",
+    "build": "astro build"
+  },
+  "devDependencies": {
+    "astro": "^0.12.9"
+  },
+  "dependencies": {
+    "@astrojs/renderer-preact": "^0.1.0",
+    "@astrojs/renderer-react": "^0.1.0"
+  }
+}

@@ -1,0 +1,26 @@
+---
+import CommonHead from '../components/CommonHead.astro';
+import Tour from '../components/Tour.astro';
+import Episodes from '../components/Episodes.astro';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <CommonHead title="LWJ: Astro" />
+</head>
+<body>
+    <main>
+        <header>
+            <div>
+                <img width="60" height="80" src="/assets/logo.svg" alt="Astro logo">
+                <h1>Welcome to <a href="https://astro.build/">Astro</a></h1>
+            </div>
+        </header>
+
+        <Tour />
+
+        <Episodes />
+    </main>
+</body>
+</html>

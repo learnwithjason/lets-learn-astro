@@ -1,0 +1,21 @@
+---
+const episodes = await fetch('https://www.learnwithjason.dev/api/schedule')
+  .then((res) => res.json());
+---
+
+<h2>Upcoming Episodes</h2>
+<ul>
+  {episodes.map((episode) => (
+    <li>
+      <a href="{`/schedule/${episode.slug.current}`}">
+        {episode.title} (with {episode.guest[0].name})
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+h2 {
+  margin-top: 2rem;
+}
+</style>
