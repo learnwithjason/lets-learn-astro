@@ -1,22 +1,21 @@
 ---
-// TODO: figure out what we did wrong here
 export let collection: any;
 
 export async function createCollection() {
-  console.log("HELP ME JEEBUS")
+  const allPosts = Astro.fetchContent('./schedule/*.md'); //Workaround for the bug
+  const res = await fetch('https://www.learnwithjason.dev/api/schedule')
+  const episodes = await res.json();
 
   return {
-    async data() {
-      const episodes = await fetch('https://www.learnwithjason.dev/api/schedule')
-        .then((res) => res.json());
-
-      console.log({ episodes })
-      
-      return episodes;
+    routes: episodes.map((episode) => {
+      const params = { slug: episode.slug.current };
+      return params;
+    }),
+    permalink: ({params}) => `/schedule/${params.slug}/`,
+    async data({params}) {
+      return episodes.filter((episode) => episode.slug.current === params.slug);
     },
     pageSize: 10,
-    routes: episodes.map((episode) => ({ slug: episode.slug.current })),
-    permalink: ({ slug }) => `/schedule/${slug}/`
   }
 }
 ---
@@ -44,9 +43,12 @@ export async function createCollection() {
 </head>
 <body>
     <main>
-<pre>
-  {JSON.stringify(collection, null, 2)}
-</pre>
+      <pre>
+        {JSON.stringify(collection, null, 2)}
+      </pre>
+    </main>
+</body>
+</html>
 
 <style>
 pre {
@@ -54,7 +56,3 @@ pre {
   overflow: scroll;
 }
 </style>
-    </main>
-</body>
-</html>
-
